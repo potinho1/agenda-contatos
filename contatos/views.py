@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Contato
+
+
+def contatos_list_view(request):
+    contatos = Contato.objects.all()
+    return render(request, 'contatos/contatos_list.html', {'contatos':contatos})
