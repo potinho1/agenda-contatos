@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import EditarContatoForm
-from .models import Contato, Grupo
+from .forms import EditarContatoForm, NovoGrupoForm, NovoTelForm
+from .models import Contato, Email, Grupo, Telefone
 
 
 def contatos_list_view(request):
@@ -62,3 +62,28 @@ def editar_contato(request, contato_id):
         form = EditarContatoForm(id=contato_id)
 
     return render(request, 'contatos/editar_contato.html', {'form': form, 'contato': contato})
+
+
+def novo_grupo_view(request):
+    if request.method == 'POST':
+        form = NovoGrupoForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contatos_list_view')
+    else:
+        form = NovoGrupoForm()
+    return render(request, 'contatos/novo_grupo.html', {'form': form})
+
+
+def novo_tel_view(request, contato_id):
+    contato = get_object_or_404(Contato, id=contato_id)
+    if request.method == 'POST':
+        form = NovoTelForm(data=request.POST)
+        if form.is_valid():
+            novo_tel = form.save(commit=False)
+            novo_tel.contato = contato
+            novo_tel.save()
+            return redirect('editar_contato', contato_id=contato.id)
+    else:
+        form = NovoTelForm()
+    return render(request, 'contatos/novo_tel.html', {'form': form, 'contato': contato})

@@ -37,3 +37,15 @@ class EditarContatoForm(forms.Form):
             raise forms.ValidationError(
                 "O nome escolhido já está sendo utilizado.")
         return nome_contato
+
+
+class NovoGrupoForm(forms.ModelForm):
+    class Meta:
+        model = Grupo
+        fields = ('nome', 'descricao')
+
+
+class NovoTelForm(forms.ModelForm):
+    class Meta:
+        model = Telefone
+        fields = ('numero',)
