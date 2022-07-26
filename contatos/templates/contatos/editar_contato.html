@@ -83,7 +83,7 @@
           Excluir
         </button>
         <a class="btn btn-primary" href="{% url 'novo_tel' contato.id %}">+ Número</a>
-        <a class="btn btn-primary" href="#">+ E-mail</a>
+        <a class="btn btn-primary" href="{% url 'novo_email' contato.id %}">+ E-mail</a>
       </p>
       <!-- Modal -->
       <div class="modal fade" id="modal{{ contato.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

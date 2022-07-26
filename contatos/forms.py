@@ -49,3 +49,9 @@ class NovoTelForm(forms.ModelForm):
     class Meta:
         model = Telefone
         fields = ('numero',)
+
+
+class NovoEmailForm(forms.ModelForm):
+    class Meta:
+        model = Email
+        fields = ('endereco',)
